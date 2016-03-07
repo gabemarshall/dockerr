@@ -2,8 +2,8 @@ FROM kalilinux/kali-linux-docker
 MAINTAINER Gabe Marshall
 ENV DEBIAN_FRONTEND noninteractive
 
-# ENV http_proxy http://10.33.50.14:8000
-# ENV https_proxy http://10.33.50.14:8000
+ENV http_proxy http://10.33.50.14:8000
+ENV https_proxy http://10.33.50.14:8000
 
 RUN apt-get update
 RUN apt-get -yqq --force-yes install metasploit-framework unzip git gcc make libpcap-dev tmux
