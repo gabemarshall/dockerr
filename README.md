@@ -1,3 +1,3 @@
-# RedTeam Docker Images
+# Docker? I don't even know her!
 
-Dockerfiles to spin up C2 servers quickly
+Dockerfiles for pentesting/redteaming
