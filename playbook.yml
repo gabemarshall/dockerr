@@ -29,6 +29,12 @@
     - name: Build Red2 empire dockerfile
       raw: docker build -t msf /pentest/redc2/msf
 
+    - name: Clone dnscat2  
+      git: repo=https://github.com/iagox86/dnscat2 dest=/pentest/dnscat2
+
+    - name: Build dnscat2 docker container
+      raw: docker build -t dnscat2 /pentest/dnscat2/server
+
     # Install Brosec
     - name: Download Brosec
       raw: wget https://github.com/gabemarshall/Brosec/releases/download/1.0/bros-1.0-linux-x86_64.tar.gz
@@ -38,3 +44,8 @@
       raw: chmod +x bros-1.0-linux-x86_64
     - name: Move Brosec
       raw: mv bros-1.0-linux-x86_64 /usr/local/bin/bros
+
+    - name: Change ssh port to 22222
+      raw: sed -i -e 's/^Port .*/Port 22122/' /etc/ssh/sshd_config
+    - name: Restart ssh server
+      raw: service ssh restart
