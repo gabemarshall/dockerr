@@ -15,6 +15,10 @@ RUN rm -rf /etc/apt/apt.conf.d/docker-gzip-indexes \
  && rm -rf /tmp/webmin_${WEBMIN_VERSION}_all.deb \
  && rm -rf /var/lib/apt/lists/*
 
+ADD bind_files/hosts /etc/hosts
+ADD bind_files/named.conf.local /etc/bind/named.conf.local
+ADD bind_files/custom.hosts /var/lib/bind/custom.hosts
+
 COPY entrypoint.sh /sbin/entrypoint.sh
 RUN chmod 755 /sbin/entrypoint.sh
 

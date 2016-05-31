@@ -9,7 +9,7 @@ echo "Enter the ip address of your server (where both the DNS server and the A r
 read ip
 
 cp bind_files/hostname.com.hosts bind_files/hostname.bak
-mv bind_files/hostname.bak bind_files/$(echo $domain).hosts
+mv bind_files/hostname.bak bind_files/custom.hosts
 sed '' 's/<DOMAIN>/'$(echo $domain)'/g' bind_files/$(echo $domain).hosts
 sed '' 's/<DOMAIN>/'$(echo $domain)'/g' bind_files/named.conf.local
 sed '' 's/<IPADDRESS>/'$(echo $ip)'/g' bind_files/$(echo $domain).hosts

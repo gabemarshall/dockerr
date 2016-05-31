@@ -7,6 +7,6 @@
 //include "/etc/bind/zones.rfc1918";
 zone "<DOMAIN>" {
 	type master;
-	file "/var/lib/bind/<DOMAIN>.hosts";
+	file "/var/lib/bind/custom.hosts";
 };
 
