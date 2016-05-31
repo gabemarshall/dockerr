@@ -6,7 +6,7 @@ RUN apt-get update
 RUN apt-get -yqq --force-yes install metasploit-framework unzip git gcc make libpcap-dev tmux
 RUN wget https://github.com/gabemarshall/Brosec/releases/download/1.0/bros-1.0-linux-x86_64.tar.gz
 RUN wget https://github.com/robertdavidgraham/masscan/archive/master.zip
-RUN unzip master.zip -d ./opt && cd /opt/masscan-master && make
+RUN unzip master.zip -d ./opt && cd /opt/masscan-master && make && mv /opt/masscan-master /opt/masscan
 RUN tar xvf bros-1.0-linux-x86_64.tar.gz && mv bros-1.0-linux-x86_64 /usr/local/bin/bros
 RUN chmod +x /usr/local/bin/bros
 RUN msfdb init

@@ -1,0 +1,16 @@
+$ttl 38400
+$($domain).	IN	SOA	ns1.$($domain). admin.$($domain). (
+			1464720875
+			10800
+			3600
+			604800
+			38400 )
+$($domain).	IN	NS	<IPADDRESS>.
+
+; A records for name servers
+ns1	IN	A	<IPADDRESS>
+
+; Other A records
+@	IN  A	<IPADDRESS>
+www IN 	A 	<IPADDRESS>
+
