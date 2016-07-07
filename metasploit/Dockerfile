@@ -13,4 +13,4 @@ RUN msfdb init
 ADD run.sh ./
 CMD ./run.sh
 # docker build -t metasploit .
-# docker run -it --rm --hostname kali -p 443:443 -p 8443:8443 -p 127.0.0.1:9191:9191 metasploit
+# docker run -it --rm --hostname kali -v /msf:/msf -p 443:443 -p 8443:8443 -p 127.0.0.1:9191:9191 metasploit

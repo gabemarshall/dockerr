@@ -9,8 +9,10 @@
 
     # Create /pentest dir
     - name: Create pentest directory
-      raw: mkdir /pentest
+      raw: mkdir -p /pentest/share
 
+    # Install python pip
+    - apt: name=python-pip state=present
     # Install apache for reverse proxying
     - apt: name=apache2 state=present
     - command: a2enmod proxy proxy_ajp proxy_http rewrite deflate headers proxy_balancer proxy_connect proxy_html
@@ -21,13 +23,19 @@
     - name: Install shellcreeper
       raw: cd /pentest/shellcreeper && npm install
 
-    # Install metasploit and empire dockerfiles
+    # Install metasploit
     - name: Clone Red2 dockerfiles
       git: repo=https://github.com/gabemarshall/redc2.git dest=/pentest/redc2
     - name: Build Red2 msf dockerfile
       raw: docker build -t msf /pentest/redc2/msf
-    - name: Build Red2 empire dockerfile
-      raw: docker build -t msf /pentest/redc2/msf
+
+    # Install Empire
+    - name: Clone Empire
+      git: repo=https://github.com/PowerShellEmpire/Empire dest=/pentest/Empire      
+    - name: Start tmux session for Empire 
+      raw: tmux -2 new-session -d -s "empire"
+    - name: Send some keys to the tmux session
+      raw: tmux send-keys "cd /pentest/Empire"
 
     - name: Clone dnscat2  
       git: repo=https://github.com/iagox86/dnscat2 dest=/pentest/dnscat2
@@ -44,8 +52,13 @@
       raw: chmod +x bros-1.0-linux-x86_64
     - name: Move Brosec
       raw: mv bros-1.0-linux-x86_64 /usr/local/bin/bros
+ 
+    - name: Start tmux session for msf
+      raw: tmux -2 new-session -d -s "msf"
+    - name: Send some keys to the tmux session
+      raw: tmux send-keys "docker run -t -i -v /pentest/share:/pentest/share -p 443:443 -p 8443:8443 -p 127.0.0.1:9191:9191 --name msfy msf"
 
-    - name: Change ssh port to 22222
+    - name: Change ssh port to 22122
       raw: sed -i -e 's/^Port .*/Port 22122/' /etc/ssh/sshd_config
     - name: Restart ssh server
       raw: service ssh restart
